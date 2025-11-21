@@ -18,16 +18,38 @@ $jawaban_id = intval($_GET['id']);
 
 // Ambil detail jawaban + tugas untuk validasi
 $sql = "
-    SELECT j.*, u.nama AS peserta_nama, t.judul AS tugas_judul, t.mentor_id
+    SELECT 
+        j.id AS jawaban_id,
+        j.jawaban_text,
+        j.file_jawaban,
+        j.nilai,
+        j.submitted_at,
+        u.nama AS peserta_nama,
+        t.judul AS tugas_judul,
+        t.mentor_id
     FROM jawaban j
     JOIN users u ON j.peserta_id = u.id
     JOIN tugas t ON j.tugas_id = t.id
     WHERE j.id = $jawaban_id
 ";
-$data = $conn->query($sql)->fetch_assoc();
 
-if (!$data || $data['mentor_id'] != $mentor_id) {
-    die("Jawaban tidak ditemukan atau bukan milik Anda.");
+$result = $conn->query($sql);
+
+// Jika query gagal → tampilkan error
+if (!$result) {
+    die("Query Error: " . $conn->error);
+}
+
+$data = $result->fetch_assoc();
+
+// Jika data kosong → hentikan
+if (!is_array($data)) {
+    die("Data jawaban tidak ditemukan.");
+}
+
+// Validasi mentor
+if (intval($data['mentor_id']) !== intval($mentor_id)) {
+    die("Jawaban bukan milik Anda.");
 }
 
 // Jika form dikirim
@@ -68,7 +90,8 @@ include "../template_mentor/sidebar.php";
     <form method="POST" class="mt-3">
         <div class="mb-3">
             <label class="form-label">Nilai</label>
-            <input type="number" name="nilai" class="form-control" step="0.01" value="<?= $data['nilai'] ?? '' ?>" required>
+            <input type="number" name="nilai" class="form-control" step="0.01" value="<?= isset($data['nilai']) ? htmlspecialchars($data['nilai']) : '' ?>"
+            required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan Nilai</button>
         <a href="manajemenTugas.php" class="btn btn-secondary">Kembali</a>

@@ -2,6 +2,13 @@
 session_start();
 include "../service/connection.php";
 include "proses_register.php";
+$path = "C:/xampp/htdocs/magang/image/logo.jpg";
+$base64 = '';
+if (file_exists($path)) {
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +25,11 @@ include "proses_register.php";
 </head>
 <main>
     <div class="container-fluid mt-5" style="font-family: initial;">
-        <div class="container text-center">
-            <h1 class="fs-3">MagangHub</h1>
-            <p>Platform manajemen magang yang komprehensif untuk peserta, mentor, dan perusahaan</p>
+        <div class="container text-center mt-4">
+            <img src="<?php echo $base64; ?>" alt="Logo" class="brand-logo" style="width: 130px; height:130px; object-fit:cover; margin-top:20px;">
+            <div>
+                <p class="mb-0 text-muted">Platform manajemen magang Basarnas untuk Peserta, Mentor, dan Admin</p>
+            </div>
         </div>
         <div class="container d-flex justify-content-center mt-5">
             <div class="card shadow-lg" style="max-width: 450px; width:100%;">
@@ -31,21 +40,17 @@ include "proses_register.php";
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="masuk-tab" href="register.php" role="tab">Daftar</a>
+                            <a class="nav-link active" id="masuk-tab" href="register.php" role="tab">Daftar</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <!-- Tab Daftar -->
                         <div class="tab-pane fade show active" id="daftar" role="tabpanel">
                             <form method="post" action="proses_register.php">
-                                <!-- Pilih Tipe Pengguna -->
-                                <!-- Pilih Tipe Pengguna -->
                                 <div class="btn-group w-100 mb-3" role="group">
                                     <input type="radio" class="btn-check" name="role" id="peserta" value="Peserta" checked>
                                     <label class="btn btn-outline-primary" for="peserta"><i class="bi bi-person"></i> Peserta</label>
                                 </div>
-
-
                                 <!-- Form -->
                                 <div class="mb-3 text-start">
                                     <label for="nama" class="form-label">Nama Lengkap</label>

@@ -22,7 +22,6 @@ $result = mysqli_query($conn, "SELECT * FROM users WHERE role = 'peserta' ORDER 
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Tanggal Daftar</th>
-                    <th>Absensi</th>
                 </tr>
             </thead>
             <tbody>

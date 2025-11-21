@@ -9,7 +9,7 @@ include "../service/connection.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Peserta</title>
-    <link rel="icon" href="../image/admin.png">
+    <link rel="icon" href="../image/logo.jpg">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="../asset/sb-admin/css/styles.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">

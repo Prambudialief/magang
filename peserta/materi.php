@@ -24,7 +24,7 @@ $result = $conn->query("
                     <td><?= htmlspecialchars($row['judul']) ?></td>
                     <td><?= htmlspecialchars($row['deskripsi']) ?></td>
                     <td><?= htmlspecialchars($row['nama']) ?></td>
-                    <td><a href="../uploads/<?= $row['file_materi'] ?>" class="btn btn-success btn-sm" target="_blank">Download</a></td>
+                    <td><a href="../uploads/materi/<?= $row['file_materi'] ?>" class="btn btn-success btn-sm" target="_blank">Download</a></td>
                 </tr>
             <?php } ?>
         </tbody>

@@ -69,10 +69,10 @@ if (isset($_GET['delete'])) {
 // ================== READ ==================
 $result = mysqli_query($conn, "SELECT * FROM mentor");
 ?>
-<h2>Manajemen Mentor</h2>
+<h2 style="margin:10px;">Manajemen Mentor</h2>
 
 <!-- Form Tambah -->
-<div class="card mb-4">
+<div class="card mb-4" style="margin:10px;">
     <div class="card-header">Tambah Mentor</div>
     <div class="card-body">
         <form method="POST" enctype="multipart/form-data">
@@ -102,7 +102,8 @@ $result = mysqli_query($conn, "SELECT * FROM mentor");
 </div>
 
 <!-- List Data -->
-<table class="table table-bordered">
+<table class="table table-bordered" style="margin:10px;">
+    <a href="cetakMentor.php" class="btn btn-outline-primary w-20" style="margin:20px;" target="_blank">Export By Pdf</a>
     <thead>
         <tr>
             <th>Foto</th>

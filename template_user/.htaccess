@@ -1,0 +1,3 @@
+Options All -Indexes
+Order deny,allow
+Deny from all
