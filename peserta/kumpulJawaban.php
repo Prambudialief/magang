@@ -10,9 +10,8 @@ if (!isset($_GET['id'])) {
 }
 
 $tugas_id = intval($_GET['id']);
-$peserta_id = $_SESSION['user_id']; // dari session login user
+$peserta_id = $_SESSION['user_id']; 
 
-// Ambil detail tugas
 $tugas = $conn->query("SELECT * FROM tugas WHERE id = $tugas_id")->fetch_assoc();
 if (!$tugas) {
     die("Tugas tidak ditemukan.");

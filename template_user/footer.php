@@ -1,16 +1,22 @@
 </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2025</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms & Conditions</a>
-                    </div>
-                </div>
+<footer class="py-3 mt-auto border-top bg-white shadow-sm">
+    <div class="container-fluid px-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between text-center text-md-start small">
+            <div class="text-muted mb-2 mb-md-0">
+                <span>&copy; <?= date('Y'); ?> <strong>Prambudi & Astri Salwa</strong></span><br>
+                <span>All Rights Reserved</span>
             </div>
-        </footer>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <img src="../image/basarnas.png"
+                    alt="Logo Basarnas"
+                    class="footer-logo img-fluid"
+                    style="max-width: 55px;
+                    max-height: 55px;">
+            </div>
+        </div>
+    </div>
+</footer>
     </div>
 </div>
 
