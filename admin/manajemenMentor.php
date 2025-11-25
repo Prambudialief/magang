@@ -1,9 +1,12 @@
 <?php
 include "../auth/auth_check.php";
+include "../service/log.php";
 include "../template/header.php";
-include "../template/navbar.php";
-include "../template/sidebar.php";
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
 // ================== CREATE ==================
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama'];
@@ -23,6 +26,7 @@ if (isset($_POST['simpan'])) {
     $query = "INSERT INTO mentor (nama, email, password, bidang_keahlian, foto)
               VALUES ('$nama','$email','$password','$bidang','$foto')";
     mysqli_query($conn, $query) or die(mysqli_error($conn));
+    addLog($conn, $_SESSION['user_id'], "admin", "Menambahkan mentor: $nama");
     header("Location: manajemenMentor.php");
     exit;
 }
@@ -54,6 +58,7 @@ if (isset($_POST['update'])) {
     $query = "UPDATE mentor SET nama='$nama', email='$email', bidang_keahlian='$bidang' 
               $password_sql $foto_sql WHERE id=$id";
     mysqli_query($conn, $query) or die(mysqli_error($conn));
+    addLog($conn, $_SESSION['user_id'], "admin", "Mengupdate mentor: $nama");
     header("Location: manajemenMentor.php");
     exit;
 }
@@ -62,14 +67,18 @@ if (isset($_POST['update'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     mysqli_query($conn, "DELETE FROM mentor WHERE id=$id") or die(mysqli_error($conn));
+    addLog($conn, $_SESSION['user_id'], "admin", "Menghapus mentor: $id");
     header("Location: manajemenMentor.php");
     exit;
 }
 
 // ================== READ ==================
 $result = mysqli_query($conn, "SELECT * FROM mentor");
+include "../template/navbar.php";
+include "../template/sidebar.php";
 ?>
-<h2 style="margin:10px;">Manajemen Mentor</h2>
+<h2 class="text-center fw-bold mt-3 mb-3">Manajemen Mentor</h2>
+<p class="text-center">Kelola Mentor Untuk Admin</p>
 
 <!-- Form Tambah -->
 <div class="card mb-4" style="margin:10px;">
@@ -102,6 +111,7 @@ $result = mysqli_query($conn, "SELECT * FROM mentor");
 </div>
 
 <!-- List Data -->
+<div class="table-responsive">
 <table class="table table-bordered" style="margin:10px;">
     <a href="cetakMentor.php" class="btn btn-outline-primary w-20" style="margin:20px;" target="_blank">Export By Pdf</a>
     <thead>
@@ -173,6 +183,7 @@ $result = mysqli_query($conn, "SELECT * FROM mentor");
     <?php } ?>
     </tbody>
 </table>
+</div>
 <?php
 include "../template/footer.php";
 ?>

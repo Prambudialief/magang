@@ -8,40 +8,42 @@ $result = mysqli_query($conn, "SELECT * FROM mentor")
 
 <div class="container-fluid px-4 mt-4">
     <h1 class="text-center fw-bold">Chat mentor</h1>
-    <div class="card mx-auto mt-4" style="width: 80rem;">
+    <div class="card mx-auto mt-4" style="max-width:1200px;">
         <div class="card-header">
             Daftar mentor
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Keahlian</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= $row['nama'] ?></td>
-                            <td><?= $row['bidang_keahlian'] ?></td>
-                            <td> <?php if ($row['foto']) { ?>
-                                    <img src="../uploads/<?= $row['foto'] ?>" width="60">
-                                <?php } else { ?>
-                                    -
-                                <?php } ?>
-                            </td>
-                            <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-success">Chat</a> </td>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Keahlian</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $row['nama'] ?></td>
+                                <td><?= $row['bidang_keahlian'] ?></td>
+                                <td> <?php if ($row['foto']) { ?>
+                                        <img src="../uploads/<?= $row['foto'] ?>"class="img-fluid" style="width:60px; height:60px; object-fit:cover;">
+                                    <?php } else { ?>
+                                        -
+                                    <?php } ?>
+                                </td>
+                                <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-success btn-sm w-100">Chat</a> </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@ include "../template_mentor/navbar.php";
 include "../template_mentor/sidebar.php";
 ?>
 <div class="container-fluid">
-    <h2 class="text-center mt-3">Manajemen Materi</h2>
+    <h2 class="text-center mt-3 fw-bold">Manajemen Materi</h2>
 
     <form method="POST" enctype="multipart/form-data" class="mb-4">
         <div class="mb-3">
@@ -23,39 +23,41 @@ include "../template_mentor/sidebar.php";
         <button type="submit" name="simpan" class="btn btn-primary">Tambah</button>
     </form>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Judul</th>
-                <th>Deskripsi</th>
-                <th>File Soal</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM materi WHERE mentor_id='$mentor_id' ORDER BY created_at DESC");
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Judul</th>
+                    <th>Deskripsi</th>
+                    <th>File Soal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM materi WHERE mentor_id='$mentor_id' ORDER BY created_at DESC");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
                 <td>{$row['judul']}</td>
                 <td>{$row['deskripsi']}</td>
                 <td>";
-                if ($row['file_materi']) {
-                    echo "<a href='../uploads/materi/{$row['file_materi']}' target='_blank'>Download</a>";
-                } else {
-                    echo "-";
-                }
-            echo "</td>
+                    if ($row['file_materi']) {
+                        echo "<a href='../uploads/materi/{$row['file_materi']}' target='_blank'>Download</a>";
+                    } else {
+                        echo "-";
+                    }
+                    echo "</td>
                 <td>
                     <a href='editMateri.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
                     <a href='sistemMateri.php?hapus={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>
                 </td>
             </tr>";
-        }
-        ?>
-        </tbody>
-        </tbody>
-    </table>
+                }
+                ?>
+            </tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <?php

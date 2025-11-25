@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "../service/log.php";
 include "../service/connection.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = 'Mentor';
             $_SESSION['nama'] = $user['nama'];
 
+            addLog($conn, $user['id'], "Mentor", "Login ke sistem");
+            
             header("Location: ../mentor/dashboard.php");
             exit;
         } else {
@@ -32,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['nama'] = $user['nama'];
+
+            addLog($conn, $user['id'], $user['role'], "Login ke sistem");
 
             if ($user['role'] === 'Admin') {
                 header("Location: ../admin/dashboard.php");

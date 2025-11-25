@@ -1,18 +1,14 @@
 <?php
-include '../auth/auth_check.php';
+include 'sistemMagang.php';
 include '../template/header.php';
 include '../template/navbar.php';
 include '../template/sidebar.php';
-include 'sistemMagang.php';
 ?>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Program Magang</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Program magang pages</li>
-    </ol>
+    <h2 class="mt-3 text-center fw-bold">Program Magang</h2>
+    <p class="text-center">Kelola Program Magang Pusdatin</p>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Program</h1>
         <form method="POST" enctype="multipart/form-data" action="sistemMagang.php">
             <div class="mb-3">
                 <label class="form-label">Judul</label>
@@ -31,23 +27,24 @@ include 'sistemMagang.php';
     </div>
 </div>
 
-<div class="container-fluid px-4">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Judul</th>
-                <th>Image</th>
-                <th>Deskripsi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        include "../service/connection.php";
-        $result = mysqli_query($conn, "SELECT * FROM program_magang");
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
+<div class="container-fluid px-4" style="max-width:1200px;">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Judul</th>
+                    <th>Image</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include "../service/connection.php";
+                $result = mysqli_query($conn, "SELECT * FROM program_magang");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
                         <td>" . $row['id'] . "</td>
                         <td>" . $row['judul'] . "</td>
                         <td><img src='../uploadMagang/" . $row['image'] . "'width='100'></td>
@@ -57,10 +54,11 @@ include 'sistemMagang.php';
                             <a href='sistemMagang.php?hapus=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>
                         </td>
                     </tr>";
-        }
-        ?>
-    </tbody>
-    </table>
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <?php

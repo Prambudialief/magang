@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../service/connection.php";
+include "../service/log.php";
 
 // Pastikan mentor sudah login
 if (!isset($_SESSION['mentor_id'])) {
@@ -59,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("di", $nilai, $jawaban_id);
 
     if ($stmt->execute()) {
+        addLog($conn, $mentor_id, "mentor", "memberikan nilai: $nilai");
         $pesan = "<div class='alert alert-success'>Nilai berhasil disimpan!</div>";
     } else {
         $pesan = "<div class='alert alert-danger'>Terjadi kesalahan: " . $conn->error . "</div>";

@@ -31,68 +31,68 @@ $result = $conn->query("
 
     <div class="card mt-4">
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Judul</th>
-                        <th>Deskripsi</th>
-                        <th>Mentor</th>
-                        <th>Deadline</th>
-                        <th>File Soal</th>
-                        <th>Aksi</th>
-                        <th>Nilai</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td>" . htmlspecialchars($row['judul']) . "</td>";
-                        echo "<td>" . nl2br(htmlspecialchars($row['deskripsi'])) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['nama']) . "</td>";
-                        echo "<td>" . date("d-m-Y", strtotime($row['deadline'])) . "</td>";
-                        echo "<td>";
-                        if (!empty($row['file_soal'])) {
-                            echo "<a href='../uploads/tugas/" . htmlspecialchars($row['file_soal']) . "' target='_blank' class='btn btn-sm btn-success'>Download</a>";
-                        } else {
-                            echo "-";
-                        }
-                        echo "</td>";
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th>Mentor</th>
+                            <th>Deadline</th>
+                            <th>File Soal</th>
+                            <th>Aksi</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $no++ . "</td>";
+                            echo "<td>" . htmlspecialchars($row['judul']) . "</td>";
+                            echo "<td>" . nl2br(htmlspecialchars($row['deskripsi'])) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['nama']) . "</td>";
+                            echo "<td>" . date("d-m-Y", strtotime($row['deadline'])) . "</td>";
+                            echo "<td>";
+                            if (!empty($row['file_soal'])) {
+                                echo "<a href='../uploads/tugas/" . htmlspecialchars($row['file_soal']) . "' target='_blank' class='btn btn-sm btn-success'>Download</a>";
+                            } else {
+                                echo "-";
+                            }
+                            echo "</td>";
 
-                        $deadlineTime = strtotime($row['deadline']);
-                        $now = time();
+                            $deadlineTime = strtotime($row['deadline']);
+                            $now = time();
 
-                        echo "<td>";
-                        if (!is_null($row['nilai'])) {
-                            echo "<button class='btn btn-secondary btn-sm' disabled>Sudah Dinilai</button> ";
-                        }
-                        elseif ($now > $deadlineTime) {
-                            echo "<button class='btn btn-danger btn-sm' disabled>Terlambat</button> ";
-                        }
-                        else {
-                            echo "<a href='kumpulJawaban.php?id={$row['id']}' class='btn btn-primary btn-sm'>Kumpulkan Jawaban</a> ";
-                        }
-                        echo "<a href='lihatJawabanSaya.php?tugas_id={$row['id']}' class='btn btn-info btn-sm'>Lihat Jawaban</a>";
+                            echo "<td>";
+                            if (!is_null($row['nilai'])) {
+                                echo "<button class='btn btn-secondary btn-sm' disabled>Sudah Dinilai</button> ";
+                            } elseif ($now > $deadlineTime) {
+                                echo "<button class='btn btn-danger btn-sm' disabled>Terlambat</button> ";
+                            } else {
+                                echo "<a href='kumpulJawaban.php?id={$row['id']}' class='btn btn-primary btn-sm'>Kumpulkan Jawaban</a> ";
+                            }
+                            echo "<a href='lihatJawabanSaya.php?tugas_id={$row['id']}' class='btn btn-info btn-sm'>Lihat Jawaban</a>";
 
-                        echo "</td>";
+                            echo "</td>";
 
-                        // Kolom nilai
-                        echo "<td>";
-                        if (!is_null($row['nilai'])) {
-                            echo "<span class='badge bg-success'>" . htmlspecialchars($row['nilai']) . "</span>";
-                        } else {
-                            echo "<span class='badge bg-warning'>Belum Dinilai</span>";
+                            // Kolom nilai
+                            echo "<td>";
+                            if (!is_null($row['nilai'])) {
+                                echo "<span class='badge bg-success'>" . htmlspecialchars($row['nilai']) . "</span>";
+                            } else {
+                                echo "<span class='badge bg-warning'>Belum Dinilai</span>";
+                            }
+                            echo "</td>";
+
+                            echo "</tr>";
                         }
-                        echo "</td>";
-
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

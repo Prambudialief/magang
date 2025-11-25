@@ -1,5 +1,6 @@
 <?php
-include "../auth/auth_check.php"; // ambil data session user
+include "../auth/auth_check.php";
+include "../service/log.php"; 
 include "../template_user/header.php";
 include "../template_user/navbar.php";
 include "../template_user/sidebar.php";
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($stmt->execute()) {
+        addLog($conn, $peserta_id, "peserta", "Mengumpulkan jawaban tugas id: $tugas_id");
         echo "<div class='alert alert-success'>Jawaban berhasil dikumpulkan!</div>";
     } else {
         echo "<div class='alert alert-danger'>Error: " . $conn->error . "</div>";

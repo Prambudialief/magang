@@ -1,5 +1,13 @@
 <?php
+session_start();
+
 include "../service/connection.php";
+include "../service/log.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
 
 // CREATE (Tambah Data)
 if (isset($_POST['simpan'])) {
@@ -15,7 +23,9 @@ if (isset($_POST['simpan'])) {
     if (move_uploaded_file($tmp, $folder . $newName)) {
         $query = "INSERT INTO program_magang (judul, image, deskripsi) 
                   VALUES ('$judul', '$newName', '$deskripsi')";
-        mysqli_query($conn, $query) or die(mysqli_error($conn));
+        mysqli_query($conn, $query);
+        addLog($conn, $_SESSION['user_id'], "admin", "Menambahkan Program Magang: $judul");
+        header("Location: programMagang.php");
     }
 }
 
@@ -23,12 +33,15 @@ if (isset($_POST['simpan'])) {
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
 
-    $result = mysqli_query($conn, "SELECT image FROM program_magang WHERE id='$id'");
+    $result = mysqli_query($conn, "SELECT judul, image FROM program_magang WHERE id='$id'");
     $row = mysqli_fetch_assoc($result);
+    $judul  = $row['judul'];
+
     if ($row && file_exists("../uploadMagang/" . $row['image']))
      { unlink("../uploadMagang/" . $row['image']); }
 
     mysqli_query($conn, "DELETE FROM program_magang WHERE id='$id'");
+    addLog($conn, $_SESSION['user_id'], "admin", "Menghapus Program Magang: $judul");
     header("Location: programMagang.php");
 }
 
@@ -65,7 +78,7 @@ if (isset($_POST['update'])) {
                 image='$image'
               WHERE id='$id'";
     mysqli_query($conn, $query);
-
+    addLog($conn, $_SESSION['user_id'], "admin", "Mengedit Program Magang: $judul");
     header("Location: programMagang.php");
     exit;
 }

@@ -26,9 +26,11 @@ if (file_exists($path)) {
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-bs-toggle="dropdown"><i style="color: black;" class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="../profile/profile.php">Profile</a></li>
-                <li><a class="dropdown-item" href="../auth/login.php">Logout</a></li>
+                <li>
+                    <hr class="dropdown-divider" />
+                </li>
+                <li><a class="dropdown-item text-center" href="../profile/profile.php">Profile</a></li>
+                <li><a class="dropdown-item text-center" href="../auth/login.php">Logout</a></li>
             </ul>
         </li>
     </ul>

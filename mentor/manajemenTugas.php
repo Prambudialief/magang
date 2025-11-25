@@ -6,7 +6,7 @@ include '../template_mentor/sidebar.php';
 ?>
 
 <div class="container">
-    <h2>Manajemen Tugas</h2>
+    <h2 class="text-center fw-bold">Manajemen Tugas</h2>
     <hr>
 
     <!-- Form Tambah Tugas -->
@@ -32,43 +32,46 @@ include '../template_mentor/sidebar.php';
 
     <!-- Tabel Daftar Tugas -->
     <h4>Daftar Tugas</h4>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Judul</th>
-                <th>Deskripsi</th>
-                <th>File Soal</th>
-                <th>Deadline</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM tugas WHERE mentor_id='$mentor_id' ORDER BY created_at DESC");
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Judul</th>
+                    <th>Deskripsi</th>
+                    <th>File Soal</th>
+                    <th>Deadline</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM tugas WHERE mentor_id='$mentor_id' ORDER BY created_at DESC");
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>
                 <td>{$row['judul']}</td>
                 <td>{$row['deskripsi']}</td>
                 <td>";
-                if ($row['file_soal']) {
-                    echo "<a href='../uploads/tugas/{$row['file_soal']}' target='_blank'>Download</a>";
-                } else {
-                    echo "-";
-                }
-            echo "</td>
+                    if ($row['file_soal']) {
+                        echo "<a href='../uploads/tugas/{$row['file_soal']}' target='_blank'>Download</a>";
+                    } else {
+                        echo "-";
+                    }
+                    echo "</td>
                 <td>{$row['deadline']}</td>
                 <td>
                     <a href='editTugas.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
                     <a href='sistemTugas.php?hapus={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>
                 </td>
             </tr>";
-        }
-        ?>
-        </tbody>
-    </table>
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Tabel Jawaban Peserta -->
     <h4 class="mt-5">Jawaban Peserta</h4>
+    <div class="table-responsive">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -83,8 +86,8 @@ include '../template_mentor/sidebar.php';
             </tr>
         </thead>
         <tbody>
-        <?php
-        $sql = "
+            <?php
+            $sql = "
             SELECT j.*, u.nama AS peserta_nama, t.judul AS tugas_judul
             FROM jawaban j
             JOIN users u ON j.peserta_id = u.id
@@ -92,10 +95,10 @@ include '../template_mentor/sidebar.php';
             WHERE t.mentor_id='$mentor_id'
             ORDER BY j.submitted_at DESC
         ";
-        $resJawaban = mysqli_query($conn, $sql);
-        $no = 1;
-        while ($row = mysqli_fetch_assoc($resJawaban)) {
-            echo "<tr>
+            $resJawaban = mysqli_query($conn, $sql);
+            $no = 1;
+            while ($row = mysqli_fetch_assoc($resJawaban)) {
+                echo "<tr>
                 <td>{$no}</td>
                 <td>{$row['peserta_nama']}</td>
                 <td>{$row['tugas_judul']}</td>
@@ -106,16 +109,17 @@ include '../template_mentor/sidebar.php';
                 } else {
                     echo "-";
                 }
-            echo "</td>
+                echo "</td>
                 <td>{$row['submitted_at']}</td>
                 <td>" . ($row['nilai'] !== null ? $row['nilai'] : "-") . "</td>
                 <td><a href='nilaiJawaban.php?id={$row['id']}' class='btn btn-sm btn-primary'>Beri Nilai</a></td>
             </tr>";
-            $no++;
-        }
-        ?>
+                $no++;
+            }
+            ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 <?php

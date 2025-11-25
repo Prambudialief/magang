@@ -7,36 +7,38 @@ $result = mysqli_query($conn, "SELECT * FROM users WHERE role = 'peserta' ORDER 
 ?>
 
 <div class="container-fluid px-4 mt-4">
-    <h1 class="text-center">Chat Peserta</h1>
-    <div class="card mx-auto mt-4" style="width: 80rem;">
+    <h2 class="text-center fw-bold">Chat Peserta</h2>
+    <div class="card mx-auto mt-4" style="max-width: 1200px;">
         <div class="card-header">
             Daftar Peserta
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Tanggal Daftar</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= $row['nama'] ?></td>
-                            <td><?= $row['email'] ?></td>
-                            <td><?= date('d-m-Y H:i', strtotime($row['created_at'])) ?></td>
-                            <td><a href="chatPesertaku.php?peserta_id=<?= $row['id'] ?>" class="btn btn-success">Chat</a>                            </td>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Tanggal Daftar</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $row['nama'] ?></td>
+                                <td><?= $row['email'] ?></td>
+                                <td><?= date('d-m-Y H:i', strtotime($row['created_at'])) ?></td>
+                                <td><a href="chatPesertaku.php?peserta_id=<?= $row['id'] ?>" class="btn btn-success">Chat</a> </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

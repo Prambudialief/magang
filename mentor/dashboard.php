@@ -31,8 +31,8 @@ $total_belum_dinilai = $result_perlu_dinilai['total_belum_dinilai'] ?? 0;
 ?>
 
 <div class="container-fluid px-4 mt-2">
-    <div class="container">
-        <h1>Mentor Dashboard</h1>
+    <div class="container text-center">
+        <h2 class="fw-bold">Dashboard Mentor</h2>
         <p>Kelola Tugas Secara Menyeluruh</p>
     </div>
     <div class="row justify-content-center">

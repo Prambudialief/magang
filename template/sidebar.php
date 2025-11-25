@@ -18,6 +18,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
   color: #fff !important;
   border-radius: 8px;
 }
+
+.icon-img {
+  transition: filter 0.3s ease;
+}
+
+/* Hover nav */
+.nav-link:hover .icon-img {
+  filter: brightness(0) invert(1);
+}
+
+/* Aktif menu */
+.active-menu .icon-img {
+  filter: brightness(0) invert(1);
+}
 </style>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
@@ -26,25 +40,25 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <div class="nav">
                     <div class="mt-3">
                         <a class="nav-link <?php if ($current_page == 'dashboard.php') echo 'active-menu'; ?>" href="../admin/dashboard.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            <div class="sb-nav-link-icon"><img src="../image/Home.png" class="icon-img" style="width: 20px; height:20px;"></div>
                             Dashboard
                         </a>
                     </div>
                     <div class="mt-3">
                         <a class="nav-link <?php if ($current_page == 'programMagang.php') echo 'active-menu'; ?>" href="../admin/programMagang.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                            <div class="sb-nav-link-icon"><img src="../image/Program magang admin.png" class="icon-img" style="width: 20px; height:20px;" alt=""></div>
                             Program Magang
                         </a>
                     </div>
                     <div class="mt-3">
                         <a class="nav-link <?php if ($current_page == 'manajemenMentor.php') echo 'active-menu'; ?>" href="../admin/manajemenMentor.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            <div class="sb-nav-link-icon"><img src="../image/Manajemen mentor dan total mentor admin.png" class="icon-img" style="width: 20px; height:20px;" alt=""></div>
                             Manajemen Mentor
                         </a>
                     </div>
                     <div class="mt-3">
                         <a class="nav-link <?php if ($current_page == 'manajemenPeserta.php') echo 'active-menu'; ?>" href="../admin/manajemenPeserta.php">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            <div class="sb-nav-link-icon"><img src="../image/Manajemen peserta dna total peserta admin.png" class="icon-img" style="width: 20px; height: 20px;" alt=""></div>
                             Manajemen Peserta
                         </a>
                     </div>
