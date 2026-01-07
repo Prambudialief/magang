@@ -10,11 +10,12 @@ $responses = [
     "tugas" => "Untuk Tugas Kamu Bisa Lihat di menu tugas ya.",
     "materi" => "Untuk materi kamu bisa lihat di menu materi ya.",
     "izin" => "Untuk izin, buka menu <b>chat</b> lalu kamu bisa izin disana",
-    "terima kasih" => "Sama-sama! 😊 Senang bisa membantu kamu."
+    "terima kasih" => "Sama-sama! 😊 Senang bisa membantu kamu.",
+    "deadline" => "Untuk deadline bisa kamu lihat di menu tugas"
 ];
 
 // Default jawaban
-$response = "Maaf, saya belum mengerti pertanyaan kamu. Coba gunakan kata kunci seperti 'upload laporan', 'deadline', atau 'izin'.";
+$response = "Maaf, saya belum mengerti pertanyaan kamu. Coba gunakan kata kunci seperti 'halo', 'terima kasih', 'upload laporan', 'deadline', atau 'izin'.";
 
 // Cari kecocokan kata
 foreach ($responses as $key => $reply) {

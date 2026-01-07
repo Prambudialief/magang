@@ -10,7 +10,7 @@ if (file_exists($path)) {
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-white bg-white border">
     <img src="<?php echo $base64; ?>" class="img-fluid" style="max-width: 40px; height: 40px;">
-    <a style="color: black;" class="navbar-brand ps-3" href="../mentor/dashboard.php">MagangHub</a>
+    <a style="color: black;" class="navbar-brand ps-3" href="../mentor/dashboard.php">Magang Hub</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
 
     <!-- Navbar Search -->

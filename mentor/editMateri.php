@@ -22,10 +22,8 @@ if (!$row) {
 ?>
 
 <div class="container-fluid px-4">
-    <h3 class="mt-4">Edit Materi</h3>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Edit Materi Untuk Peserta</li>
-    </ol>
+    <h3 class="mt-4 text-center fw-bold">Edit Materi</h3>
+   <p class="text-center mt-2">Edit Materi Untuk Peserta</p>
     <form action="materi.php" enctype="multipart/form-data" method="post">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
         <input type="hidden" name="old_file" value="<?= $row['file_materi']; ?>">

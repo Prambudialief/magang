@@ -22,7 +22,7 @@ $result = mysqli_query($conn, "SELECT * FROM program_magang");
 
 <div class="container-fluid px-4 mt-2">
     <div class="container">
-        <h2 class="text-center fw-bold mt-3 mb-2">Panel Administrator</h2>
+        <h2 class="text-center fw-bold mt-3 mb-2">Dashboard Admin</h2>
         <p class="text-center">Kelola Sistem MagangHub secara menyeluruh</p>
     </div>
     <div class="row justify-content-center">

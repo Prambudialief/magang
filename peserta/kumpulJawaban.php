@@ -64,10 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-<div class="container mt-4">
-    <h2>Kumpul Jawaban</h2>
-    <hr>
+<style> 
+.shadow-bottom { 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); 
+    border-radius: 10px; 
+    padding: 20px; 
+    background: #fff; } 
+</style>
+<h2 class="text-center fw-bold mt-4">Kumpulkan Jawaban</h2>
+<div class="container mt-4 shadow-bottom">
     <h5><?= htmlspecialchars($tugas['judul']) ?></h5>
     <p><?= nl2br(htmlspecialchars($tugas['deskripsi'])) ?></p>
     <?php if ($tugas['file_soal']): ?>

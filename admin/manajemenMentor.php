@@ -82,7 +82,7 @@ include "../template/sidebar.php";
 
 <!-- Form Tambah -->
 <div class="card mb-4" style="margin:10px;">
-    <div class="card-header">Tambah Mentor</div>
+    <div class="card-header text-center" style="background-color: #0088FF; color:white;">Tambah Mentor</div>
     <div class="card-body">
         <form method="POST" enctype="multipart/form-data">
             <div class="mb-3">

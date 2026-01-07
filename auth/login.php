@@ -3,50 +3,64 @@ session_start();
 include "../service/log.php";
 include "../service/connection.php";
 
+$error = ""; // tempat menyimpan error
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
-    $role = $_POST['role']; // role dipilih dari radio button
+    $role = $_POST['role']; // role dari radio button
 
     if ($role === 'Mentor') {
-        // cek ke tabel mentor
+
+        // cek mentor
         $result = mysqli_query($conn, "SELECT * FROM mentor WHERE email='$email' LIMIT 1");
-        $user = mysqli_fetch_assoc($result);
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['mentor_id'] = $user['id'];
-            $_SESSION['role'] = 'Mentor';
-            $_SESSION['nama'] = $user['nama'];
+        if ($result && mysqli_num_rows($result) === 1) {
+            $user = mysqli_fetch_assoc($result);
 
-            addLog($conn, $user['id'], "Mentor", "Login ke sistem");
-            
-            header("Location: ../mentor/dashboard.php");
-            exit;
+            if (password_verify($password, $user['password'])) {
+
+                $_SESSION['mentor_id'] = $user['id'];
+                $_SESSION['role'] = 'Mentor';
+                $_SESSION['nama'] = $user['nama'];
+
+                addLog($conn, $user['id'], "Mentor", "Login ke sistem");
+
+                header("Location: ../mentor/dashboard.php");
+                exit;
+            } else {
+                $error = "Password salah!";
+            }
         } else {
-            echo "<script>alert('Email atau password salah untuk Mentor'); window.location='login.php';</script>";
-            exit;
+            $error = "Email tidak ditemukan untuk Mentor!";
         }
     } else {
-        // cek ke tabel users (Admin & Peserta)
+
+        // cek admin atau peserta
         $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND role='$role' LIMIT 1");
-        $user = mysqli_fetch_assoc($result);
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['nama'] = $user['nama'];
+        if ($result && mysqli_num_rows($result) === 1) {
+            $user = mysqli_fetch_assoc($result);
 
-            addLog($conn, $user['id'], $user['role'], "Login ke sistem");
+            if (password_verify($password, $user['password'])) {
 
-            if ($user['role'] === 'Admin') {
-                header("Location: ../admin/dashboard.php");
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['nama'] = $user['nama'];
+
+                addLog($conn, $user['id'], $user['role'], "Login ke sistem");
+
+                if ($user['role'] === 'Admin') {
+                    header("Location: ../admin/dashboard.php");
+                } else {
+                    header("Location: ../peserta/dashboard.php");
+                }
+                exit;
             } else {
-                header("Location: ../peserta/dashboard.php");
+                $error = "Password salah!";
             }
-            exit;
         } else {
-            echo "<script>alert('Email atau password salah'); window.location='login.php';</script>";
-            exit;
+            $error = "Email tidak ditemukan untuk $role!";
         }
     }
 }
@@ -86,6 +100,12 @@ if (file_exists($path)) {
             <div class="container d-flex justify-content-center mt-3">
                 <div class="card shadow-lg" style="max-width: 450px; width:100%;">
                     <div class="card-body p-4">
+                        <?php if (!empty($error)) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= htmlspecialchars($error) ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
                         <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="masuk-tab" href="login.php" role="tab">Masuk</a>
@@ -123,7 +143,14 @@ if (file_exists($path)) {
             </div>
         </div>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../asset/sb-admin/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script src="../asset/sb-admin/js/datatables-simple-demo.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const radios = document.querySelectorAll('input[name="role"]');

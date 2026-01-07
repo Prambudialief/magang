@@ -250,9 +250,9 @@ if ($result && $result->num_rows > 0) {
 
                     
                     <?php if ($tugas['jawaban_id']) : ?>
-                      <span class="badge bg-success">Dikumpulkan</span>
+                      <span class="badge bg-success" style="padding: 8.5px;">Dikumpulkan</span>
                     <?php else : ?>
-                      <a href="manajemenTugas.php?id=<?php echo $tugas['id']; ?>" class="btn btn-sm btn-primary">
+                      <a href="manajemenTugas.php?id=<?php echo $tugas['id']; ?>" class="btn btn-sm btn-primary" style="border-radius: 5px;">
                         Kumpulkan
                       </a>
                     <?php endif; ?>
@@ -302,7 +302,7 @@ if ($result && $result->num_rows > 0) {
               <div class="p-3 rounded-4 w-100 shadow-sm d-flex align-items-center justify-content-between"
                 style="background-color:#fff6e7; border:solid #ffc107;">
                 <div class="d-flex align-items-center">
-                  <i class="fa-solid fa-hourglass-half text-warning fs-3 me-3"></i>
+                  <img src="../image/Pending peserta.png" style="width: 35px; height:35px;" class="fs-3 me-3" alt="">
                   <span class="fw-bold text-warning">Belum Selesai</span>
                 </div>
                 <h3 class="fw-bold mb-0 text-dark"><?php echo $tugas_belum; ?></h3>

@@ -22,7 +22,7 @@ include '../template/sidebar.php';
                 <label class="form-label">Deskripsi</label>
                 <textarea class="form-control" name="deskripsi" required></textarea>
             </div>
-            <button type="submit" name="simpan" class="btn btn-primary">Submit</button>
+            <button type="submit" name="simpan" class="btn btn-primary mt-1 mb-3">Tambah</button>
         </form>
     </div>
 </div>
@@ -50,7 +50,7 @@ include '../template/sidebar.php';
                         <td><img src='../uploadMagang/" . $row['image'] . "'width='100'></td>
                         <td>" . $row['deskripsi'] . "</td>
                         <td>
-                            <a href='editMagang.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                            <a href='editMagang.php?id=" . $row['id'] . "' class='btn btn-warning btn-sm mb-2'>Edit</a>
                             <a href='sistemMagang.php?hapus=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>
                         </td>
                     </tr>";

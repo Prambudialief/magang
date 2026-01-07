@@ -19,12 +19,8 @@ if (!$row) {
 ?>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Edit Program Magang</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Edit Program magang pages</li>
-    </ol>
+    <h1 class="mt-4 text-center fw-bold">Edit Program Magang</h1>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Program</h1>
         <form method="POST" enctype="multipart/form-data" action="programMagang.php">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
             <div class="mb-3">

@@ -73,7 +73,7 @@ include "../template_mentor/sidebar.php";
 ?>
 
 <div class="container mt-4">
-    <h2>Penilaian Jawaban</h2>
+    <h2 class="text-center fw-bold">Penilaian Jawaban</h2>
     <hr>
     <?php if (isset($pesan)) echo $pesan; ?>
 

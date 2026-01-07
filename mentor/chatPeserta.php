@@ -9,7 +9,7 @@ $result = mysqli_query($conn, "SELECT * FROM users WHERE role = 'peserta' ORDER 
 <div class="container-fluid px-4 mt-4">
     <h2 class="text-center fw-bold">Chat Peserta</h2>
     <div class="card mx-auto mt-4" style="max-width: 1200px;">
-        <div class="card-header">
+        <div class="card-header text-center" style="background-color: #0088FF; color:white;">
             Daftar Peserta
         </div>
         <div class="card-body">

@@ -38,7 +38,7 @@ $result = mysqli_query($conn, "SELECT * FROM mentor")
                                         -
                                     <?php } ?>
                                 </td>
-                                <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-success btn-sm w-100">Chat</a> </td>
+                                <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-primary btn-sm w-100">Chat</a> </td>
                             </tr>
                         <?php } ?>
                     </tbody>

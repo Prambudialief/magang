@@ -32,27 +32,34 @@ if (!isset($_GET['mentor_id'])) {
     include "../template_peserta/header.php";
     include "../template_peserta/navbar.php";
     include "../template_peserta/sidebar.php";
-    ?>
+?>
     <div class="container mt-4">
         <h2>Daftar Mentor</h2>
         <table class="table table-bordered">
             <thead>
-                <tr><th>No</th><th>Nama</th><th>Email</th><th>Tgl Daftar</th><th>Aksi</th></tr>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Tgl Daftar</th>
+                    <th>Aksi</th>
+                </tr>
             </thead>
             <tbody>
-                <?php $no=1; while($row=$res->fetch_assoc()){ ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= htmlspecialchars($row['nama']) ?></td>
-                    <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= date("d-m-Y H:i", strtotime($row['created_at'])) ?></td>
-                    <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-success btn-sm">Chat</a></td>
-                </tr>
+                <?php $no = 1;
+                while ($row = $res->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= htmlspecialchars($row['nama']) ?></td>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
+                        <td><?= date("d-m-Y H:i", strtotime($row['created_at'])) ?></td>
+                        <td><a href="chatMentorku.php?mentor_id=<?= $row['id'] ?>" class="btn btn-success btn-sm">Chat</a></td>
+                    </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
-    <?php
+<?php
     include "../template_peserta/footer.php";
     exit;
 }
@@ -91,14 +98,14 @@ include "../template_user/sidebar.php";
 ?>
 
 <div class="container mt-4">
-    <h2>Chat dengan Mentor: <?= htmlspecialchars($mentor['nama']) ?></h2>
+    <h2 class="text-center fw-bold mb-2">Chat Mentor: <?= htmlspecialchars($mentor['nama']) ?></h2>
     <div class="card mt-3">
         <div class="card-body chat-box" style="height:420px;overflow-y:auto;background:#f8f9fa;">
-            <?php while($row=$chats->fetch_assoc()){ ?>
+            <?php while ($row = $chats->fetch_assoc()) { ?>
                 <?php if ($row['pengirim'] === 'peserta') { ?>
                     <!-- bubble peserta -->
                     <div class="d-flex justify-content-end mb-2">
-                        <div class="p-2 rounded bg-success text-white" style="max-width:70%;">
+                        <div class="p-2 rounded bg-primary text-white" style="max-width:70%;">
                             <?= nl2br(htmlspecialchars($row['pesan'])) ?>
                             <div class="text-end" style="font-size:0.75em;opacity:0.8;">
                                 <?= date("d-m-Y H:i", strtotime($row['created_at'])) ?>
@@ -108,10 +115,10 @@ include "../template_user/sidebar.php";
                 <?php } else { ?>
                     <!-- bubble mentor -->
                     <div class="d-flex justify-content-start mb-2">
-                        <div class="p-2 rounded bg-light" style="max-width:70%;">
-                            <strong><?= htmlspecialchars($mentor['nama']) ?>:</strong><br>
+                        <div class="p-2 rounded bg-primary text-white" style="max-width:70%;">
+                            <?= htmlspecialchars($mentor['nama']) ?>:<br>
                             <?= nl2br(htmlspecialchars($row['pesan'])) ?>
-                            <div class="text-muted" style="font-size:0.75em;">
+                            <div class="text-end" style="font-size:0.75em;opacity:0.8;">
                                 <?= date("d-m-Y H:i", strtotime($row['created_at'])) ?>
                             </div>
                         </div>
@@ -124,17 +131,17 @@ include "../template_user/sidebar.php";
             <form method="POST" class="d-flex">
                 <input type="hidden" name="mentor_id" value="<?= $mentor_id ?>">
                 <input type="text" name="pesan" class="form-control" placeholder="Tulis pesan..." required>
-                <button type="submit" name="kirim" class="btn btn-success ms-2">Kirim</button>
+                <button type="submit" name="kirim" class="btn btn-primary ms-2"><img src="../image/navigasi kirim chat mentor.png" width="40px" class="me-1"></button>
             </form>
         </div>
     </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-    let box = document.querySelector('.chat-box');
-    if(box) box.scrollTop = box.scrollHeight;
-});
+    document.addEventListener("DOMContentLoaded", function() {
+        let box = document.querySelector('.chat-box');
+        if (box) box.scrollTop = box.scrollHeight;
+    });
 </script>
 
 <?php include "../template_user/footer.php"; ?>

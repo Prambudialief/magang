@@ -25,8 +25,8 @@ include '../template/sidebar.php';
 <p class="text-center">Kelola Peserta Untuk Admin</p>
 
 <!-- List Data -->
-<div class="card">
-    <div class="card-header">
+<div class="card m-4">
+    <div class="card-header text-center" style="background-color: #0088FF; color:white;">
         Daftar Peserta
     </div>
     <div class="card-body">

@@ -91,7 +91,7 @@ include "../template_mentor/sidebar.php";
 ?>
 
 <div class="container mt-4">
-    <h2>Chat dengan Peserta: <?= htmlspecialchars($peserta['nama']) ?></h2>
+    <h2 class="text-center fw-bold mb-2">Chat dengan Peserta: <?= htmlspecialchars($peserta['nama']) ?></h2>
     <div class="card mt-3">
         <div class="card-body chat-box" style="height:420px;overflow-y:auto;background:#f8f9fa;">
             <?php while($row=$chats->fetch_assoc()){ ?>
@@ -108,10 +108,10 @@ include "../template_mentor/sidebar.php";
                 <?php } else { ?>
                     <!-- bubble peserta -->
                     <div class="d-flex justify-content-start mb-2">
-                        <div class="p-2 rounded bg-light" style="max-width:70%;">
-                            <strong><?= htmlspecialchars($peserta['nama']) ?>:</strong><br>
+                        <div class="p-2 rounded bg-primary text-white" style="max-width:70%;">
+                            <?= htmlspecialchars($peserta['nama']) ?>:<br>
                             <?= nl2br(htmlspecialchars($row['pesan'])) ?>
-                            <div class="text-muted" style="font-size:0.75em;">
+                            <div class="text-end" style="font-size:0.75em;">
                                 <?= date("d-m-Y H:i", strtotime($row['created_at'])) ?>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ include "../template_mentor/sidebar.php";
             <form method="POST" class="d-flex">
                 <input type="hidden" name="peserta_id" value="<?= $peserta_id ?>">
                 <input type="text" name="pesan" class="form-control" placeholder="Tulis pesan..." required>
-                <button type="submit" name="kirim" class="btn btn-primary ms-2">Kirim</button>
+                <button type="submit" name="kirim" class="btn btn-primary ms-2"><img src="../image/navigasi kirim chat mentor.png" width="40px" class="me-1"></button>
             </form>
         </div>
     </div>

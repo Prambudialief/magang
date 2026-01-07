@@ -37,7 +37,7 @@ include "../template_user/sidebar.php";
 ?>
 
 <div class="container mt-4">
-    <h2>Jawaban Saya</h2>
+    <h2 class="text-center fw-bold mt-2">Jawaban Saya</h2>
     <h5>Tugas: <?= htmlspecialchars($tugas['judul']) ?></h5>
     <p><?= nl2br(htmlspecialchars($tugas['deskripsi'])) ?></p>
     <hr>

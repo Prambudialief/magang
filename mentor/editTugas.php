@@ -22,10 +22,8 @@ if (!$row) {
 ?>
 
 <div class="container-fluid px-4 mt-4">
-    <h3 class="mt-4">Edit Tugas</h3>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Edit Tugas Untuk Peserta</li>
-    </ol>
+    <h3 class="mt-4 text-center fw-bold">Edit Tugas</h3>
+    <p class="text-center mt-2">Edit Tugas Untuk Peserta</p>
     <form action="manajemenTugas.php" enctype="multipart/form-data" method="post">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
         <input type="hidden" name="old_file" value="<?= $row['file_soal']; ?>">
